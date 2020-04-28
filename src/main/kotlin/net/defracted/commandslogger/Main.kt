@@ -13,8 +13,6 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class Main : JavaPlugin() {
-    private var instance: Main? = null
-
     val loggerTargets = HashMap<UUID, HashSet<String>>()
 
     companion object {
@@ -22,8 +20,6 @@ class Main : JavaPlugin() {
     }
 
     override fun onEnable() {
-        setInstance(this);
-
         loadListener(CommandsUsed(this))
         loadCommand("commandslogger", CommandsLogger(this), CommandsLoggerCompleter())
     }
@@ -43,13 +39,5 @@ class Main : JavaPlugin() {
 
     private fun loadListener(listener: Listener) {
         this.server.pluginManager.registerEvents(listener, this)
-    }
-
-    fun getInstance(): Main? {
-        return instance
-    }
-
-    private fun setInstance(inst: Main) {
-        instance = inst
     }
 }
